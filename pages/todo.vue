@@ -8,7 +8,7 @@
     </ul>
     <h3>Saved in store</h3>
     <ul>
-      <li v-for="todo in todos">{{ todo.title }}</li>
+      <li v-for="todo in todos" @click="toggleCheck">{{ todo.title }}</li>
     </ul>
     <nuxt-link class="button" to="/">
       Home
@@ -26,13 +26,13 @@ export default {
   async asyncData ({ req }) {
     const { data } = await axios.get('https://jsonplaceholder.typicode.com/todos');
     return {
-      items: data,
+      items: data.slice(0, 10),
       name: req ? 'server' : 'client',
     };
   },
   async fetch ({ store }) {
     const { data } = await axios.get('https://jsonplaceholder.typicode.com/todos');
-    store.commit('settodos', data);
+    store.commit('todos/settodos', data);
   },
   data() {
     return {
@@ -44,8 +44,19 @@ export default {
       title: `Todos (${this.name}-side)`
     };
   },
-  computed: mapState([
-    'todos'
-  ])
+  computed: {
+    items() {
+      return this.items;
+    },
+    todos() {
+      return [...this.$store.state.todos.todos].slice(0, 10);
+    }
+  },
+  methods: {
+    toggleCheck(id) {
+      console.log(id)
+      this.$store.commit('todos/checkTodo', id)
+    }
+  }
 };
 </script>
