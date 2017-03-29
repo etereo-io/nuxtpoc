@@ -1,0 +1,10 @@
+{
+  "name": "geniac",
+  "scripts": {
+    "dev": "nuxt"
+  },
+  "dependencies": {
+    "axios": "^0.15.3",
+    "nuxt": "^0.10.5"
+  }
+}
