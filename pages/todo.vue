@@ -1,14 +1,14 @@
 <template>
   <div class="home">
     <h1>Hello world!</h1>
-    <p>Loaded from the {{name}}-side</p>
+    <p>Loaded from the {{ name }}-side</p>
     <h2>Called each time</h2>
     <ul>
-      <li v-for="item in items">{{ item.title }}</li>
+      <li v-for="item in items" :class="{ checked: item.completed }" @click="toggleCheckFromComponent(item.id)">{{ item.title }}</li>
     </ul>
-    <h3>Saved in store</h3>
+    <h2>Saved in store</h2>
     <ul>
-      <li v-for="todo in todos" @click="toggleCheck">{{ todo.title }}</li>
+      <li v-for="todo in todos" :class="{ checked: todo.completed }" @click="toggleCheckFromStore(todo)">{{ todo.title }}</li>
     </ul>
     <nuxt-link class="button" to="/">
       Home
@@ -20,7 +20,6 @@
 
 <script>
 import axios from 'axios';
-import { mapState } from 'vuex'
 
 export default {
   async asyncData ({ req }) {
@@ -31,8 +30,10 @@ export default {
     };
   },
   async fetch ({ store }) {
-    const { data } = await axios.get('https://jsonplaceholder.typicode.com/todos');
-    store.commit('todos/settodos', data);
+    if (store.state.todos.todos.length === 0) {
+      const { data } = await axios.get('https://jsonplaceholder.typicode.com/todos');
+      store.commit('todos/setTodos', data);
+    }
   },
   data() {
     return {
@@ -53,10 +54,20 @@ export default {
     }
   },
   methods: {
-    toggleCheck(id) {
-      console.log(id)
-      this.$store.commit('todos/checkTodo', id)
-    }
+    toggleCheckFromStore(item) {
+      this.$store.commit('todos/checkTodo', item)
+    },
+    toggleCheckFromComponent(id) {
+      this.items[id - 1].completed = !this.items[id - 1].completed;
+    },
   }
 };
 </script>
+<style scoped>
+  li {
+      cursor: pointer;
+  }
+  .checked {
+    text-decoration: line-through;
+  }
+</style>
