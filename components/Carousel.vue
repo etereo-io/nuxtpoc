@@ -20,13 +20,8 @@
         </slide>
         <slide slot="slides" :style="{ 'background-color': '#03a9f4' }">
           <div>
-            <svg>
-            <use xlink:href="#computer"></use>
-          </svg>
-          </div>
-          <div>
-            <h1>Hosting</h1>
-            <span>Optimizamos el despliegue de tu aplicación, porque la velocidad y la seguridad importan.</span>
+            <h1>We are your friends</h1>
+            <span>You are never going to be alone, darling.</span>
           </div>
         </slide>
       </carousel>
