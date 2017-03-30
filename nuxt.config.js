@@ -10,21 +10,22 @@ module.exports = {
       app: 'app.[chunkhash].js'
     },
     // Customize webpack loaders
-    loaders: [
+    loaders:[
       {
-        test: /\.(png|jpe?g|gif|svg)$/,
-        loader: 'url-loader',
-        query: {
-          limit: 1000,
-          name: 'img/[name].[hash:7].[ext]'
-        }
+        test: /\.svg$/,
+        include: /assets\/svg/,
+        loader: 'svg-sprite-loader?' + JSON.stringify({
+          name: '[name]',
+          prefixize: false
+        })
       },
       {
-        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        test: /\.(png|jpg|gif|svg)$/,
         loader: 'url-loader',
-        query: {
-          limit: 1000,
-          name: 'fonts/[name].[hash:7].[ext]'
+        exclude: /assets\/svg/,
+        options: {
+          limit: 1000, // 1K limit
+          name: 'img/[name].[hash:8].[ext]'
         }
       }
     ],
@@ -48,7 +49,7 @@ module.exports = {
     max: 1000,
     maxAge: 900000
   },
-  css: [
+  css: ['assets/css/main.css'
     // Load a node.js module
     // 'hover.css/css/hover-min.css',
     // node.js module but we specify the pre-processor
@@ -62,7 +63,7 @@ module.exports = {
   dev: (process.env.NODE_ENV !== 'production'),
   // Nuxt.js lets you create environment variables that will be shared for the client and server-side.
   env: {
-    // baseUrl: process.env.BASE_URL || 'http://localhost:3000'
+    baseUrl: process.env.BASE_URL || 'http://localhost:3000'
   },
   // Configure the generation of your universal web application to a static web application.
   // generate: {
@@ -103,17 +104,14 @@ module.exports = {
     ]
   },
   // Nuxt.js uses it's own component to show a progress bar between the routes. You can customize it, disable it or create your own component.
-  loading: {
-    color: 'blue',
-    height: '5px'
-  },
+  loading: false,
   // performance options.
   performance: {
     gzip: true,
     prefetch: true
   },
   // The plugins property lets you add vue.js plugins easily to your main application.
-  plugins: [],
+  plugins: ['~plugins/svg-sprite-loader'],
   // Define the workspace (string)
   rootDir: process.cwd(),
   router: {
@@ -137,13 +135,9 @@ module.exports = {
   },
   // Define the source directory of your nuxt.js application
   // srcDir: '',
-  // transition: {
-  //   name: 'page',
-  //   mode: 'out-in',
-  //   beforeEnter (el) {
-  //     console.log('Before enter...');
-  //   }
-  // },
+  transition: {
+    name: 'fade',
+  },
   // The watchers property lets you overwrite watchers configuration in your nuxt.config.js.
   // watchers: {
   //   chokidar: {},
