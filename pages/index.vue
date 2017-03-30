@@ -1,14 +1,12 @@
 <template>
   <div class="home container">
-    <h1>Hello world!</h1>
-    <p>Loaded from the {{name}}-side</p>
-    <nuxt-link class="button" to="/todo">
-      Todo
-    </nuxt-link>
+    <carousel></carousel>
   </div>
 </template>
 
 <script>
+import carousel from '~/components/Carousel';
+
 export default {
   asyncData ({ req }) {
     return {
@@ -20,6 +18,8 @@ export default {
       title: `Home (${this.name}-side)`
     }
   },
-  layout: 'carousel',
+  components: {
+    carousel,
+  }
 }
 </script>

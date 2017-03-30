@@ -10,9 +10,7 @@
     <ul>
       <li v-for="todo in todos" :class="{ checked: todo.completed }" @click="toggleCheckFromStore(todo)">{{ todo.title }}</li>
     </ul>
-    <nuxt-link class="button" to="/">
-      Home
-    </nuxt-link>
+    <nuxt-link class="button" to="/">Home</nuxt-link>
   </div>
 </template>
 

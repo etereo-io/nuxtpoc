@@ -1,18 +1,31 @@
 <template>
-  <transition name="bounce" appear>
-    <div>
-      <nuxt/>
-    </div>
+  <div>
+    <navigation>
+      <nuxt-link tag="li" class="button" to="/" exact><a>Home</a></nuxt-link>
+      <nuxt-link tag="li" class="button" to="/todo" exact><a>Todo</a></nuxt-link>
+    </navigation>
+    <transition name="bounce" appear>
+    <nuxt/>
   </transition>
+  </div>
 </template>
 
 <script>
-  export default {
-    head: {
-      meta: [
-        { charset: 'utf-8' },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      ],
-    },
+import navigation from '~/components/Navigation';
+
+export default {
+  head: {
+    meta: [{
+        charset: 'utf-8'
+      },
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1'
+      },
+    ],
+  },
+  components: {
+    navigation,
   }
+}
 </script>
