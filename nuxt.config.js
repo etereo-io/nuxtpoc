@@ -49,7 +49,7 @@ module.exports = {
     max: 1000,
     maxAge: 900000
   },
-  css: ['assets/css/main.css'
+  css: [{src: '~assets/css/main.styl', lang: 'stylus'},
     // Load a node.js module
     // 'hover.css/css/hover-min.css',
     // node.js module but we specify the pre-processor

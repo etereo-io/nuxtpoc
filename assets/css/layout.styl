@@ -1,0 +1,83 @@
+.flex
+  display flex
+.flex-25
+  max-width 25%
+.flex-33
+  max-width 33%
+.layout-row, .layout-column
+  display: flex;
+  flex: 1;
+  box-sizing: border-box;
+  -webkit-box-direction normal
+.layout-row
+  -webkit-box-orient: horizontal;
+.layout-column
+  flex-direction: column;
+  -webkit-box-orient: vertical;
+.layout-align-center, .layout-align-center-center, .layout-align-center-end, .layout-align-center-start, .layout-align-center-stretch
+  -webkit-box-pack center
+  justify-content center
+.layout-align-center-center
+  align-items: center;
+  align-content: center;
+  max-width: 100%;
+.layout-align-center-end
+  align-items: flex-end;
+  align-content: flex-end;
+.layout-align-center-start
+  align-items: flex-start;
+  align-content: flex-start;
+.layout-align-space-between-center
+  justify-content space-between
+  align-items center
+  align-content center
+  max-width 100%
+
+.max-width
+  max-width: 1220px;
+  position: relative;
+  margin: 0 auto;
+  left: 0
+  right 0
+// Margin and Padding
+.m-x-auto
+  margin-right: auto !important
+  margin-left:  auto !important
+
+$props = {margin: m, padding: p}
+
+$spacer-base = 1rem
+$spacer-x = $spacer-base
+$spacer-y = $spacer-base
+$spacers = { x: 0, y: 0 },
+           { x: $spacer-x, y: $spacer-y },
+           { x: ($spacer-x * 2), y: ($spacer-y * 2) },
+           { x: ($spacer-x * 3), y: ($spacer-y * 3) },
+           { x: ($spacer-x * 4), y: ($spacer-y * 4) }
+
+for $prop, $abbrev in $props
+
+  for $spacer, $size in $spacers
+
+    $length-x = $spacer.x
+    $length-y = $spacer.y
+
+    .{$abbrev}-a-{$size}
+      {$prop}: $length-y $length-x !important // a = All sides
+    .{$abbrev}-t-{$size}
+      {$prop}-top: $length-y !important
+    .{$abbrev}-r-{$size}
+      {$prop}-right: $length-x !important
+    .{$abbrev}-b-{$size}
+      {$prop}-bottom: $length-y !important
+    .{$abbrev}-l-{$size}
+      {$prop}-left: $length-x !important
+
+    // Axes
+    .{$abbrev}-x-{$size}
+      {$prop}-right:  $length-x !important
+      {$prop}-left:   $length-x !important
+
+    .{$abbrev}-y-{$size}
+      {$prop}-top:    $length-y !important
+      {$prop}-bottom: $length-y !important
