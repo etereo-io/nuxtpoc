@@ -1,10 +1,10 @@
 <template>
-  <div class="home">
+  <div class="todo container">
     <h1>Hello world!</h1>
-    <p>Loaded from the {{ name }}-side</p>
+    <p>Loaded from the {{name}}-side</p>
     <h2>Called each time</h2>
     <ul>
-      <li v-for="item in items" :class="{ checked: item.completed }" @click="toggleCheckFromComponent(item.id)">{{ item.title }}</li>
+      <li v-for="item in computedItems" :class="{ checked: item.completed }" @click="toggleCheckFromComponent(item.id)">{{ item.title }}</li>
     </ul>
     <h2>Saved in store</h2>
     <ul>
@@ -16,12 +16,12 @@
   </div>
 </template>
 
-<style scoped></style>
-
 <script>
-import axios from 'axios';
+import axios from '~plugins/axios';
+import { mapState } from 'vuex';
 
 export default {
+  transition: 'bounce',
   async asyncData ({ req }) {
     const { data } = await axios.get('https://jsonplaceholder.typicode.com/todos');
     return {
@@ -46,7 +46,7 @@ export default {
     };
   },
   computed: {
-    items() {
+    computedItems() {
       return this.items;
     },
     todos() {
@@ -55,12 +55,13 @@ export default {
   },
   methods: {
     toggleCheckFromStore(item) {
+      console.log(item.completed);
       this.$store.commit('todos/checkTodo', item)
     },
     toggleCheckFromComponent(id) {
       this.items[id - 1].completed = !this.items[id - 1].completed;
     },
-  }
+  },
 };
 </script>
 <style scoped>

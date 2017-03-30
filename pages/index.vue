@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home container">
     <h1>Hello world!</h1>
     <p>Loaded from the {{name}}-side</p>
     <nuxt-link class="button" to="/todo">
@@ -7,8 +7,6 @@
     </nuxt-link>
   </div>
 </template>
-
-<style scoped></style>
 
 <script>
 export default {
@@ -22,5 +20,6 @@ export default {
       title: `Home (${this.name}-side)`
     }
   },
+  layout: 'carousel',
 }
 </script>

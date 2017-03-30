@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <nuxt/>
-  </div>
+  <transition name="bounce" appear>
+    <div>
+      <nuxt/>
+    </div>
+  </transition>
 </template>
 
 <script>
