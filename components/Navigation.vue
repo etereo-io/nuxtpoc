@@ -1,7 +1,7 @@
 <template>
     <footer class="navigation">
       <div class="ink-bar">
-        <div class="ink" :style="{ transform: `translate3d(${offset}px,0,0)`, width: `${itemWidth}px` }"></div>
+        <div class="ink" :style="{ transform: `translate3d(${computedOffset}px,0,0)`, width: `${computedWidth}px` }"></div>
       </div>
       <div class="layout-row layout-align-space-between-center">
       <nav>
@@ -32,9 +32,12 @@ export default {
   },
   methods: {
     getActiveElement(path) {
-      return path ? this.$el.querySelector(`a[href='${path}']`) : this.$el.querySelector('.router-link-active');
+      return path ? this.$el.querySelector(`a[href='${path}']`) : this.$el.querySelector('.nuxt-link-active');
     },
     setInkBarPosition(el = this.getActiveElement()) {
+      if (!el) {
+        return;
+      }
       this.offset = el.offsetLeft;
       this.itemWidth = el.clientWidth - 20;
     },
@@ -48,8 +51,16 @@ export default {
       this.setInkBarPosition(activeEl);
     },
   },
+  computed: {
+    computedOffset() {
+      return this.offset;
+    },
+    computedWidth() {
+      return this.itemWidth;
+    }
+  },
   mounted() {
-    this.setInkBarPosition();
+    this.setInkBarPosition(this.getActiveElement());
   },
 };
 </script>
