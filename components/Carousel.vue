@@ -5,8 +5,8 @@
       <carousel arrows="true" dots="true">
         <slide slot="slides" :style="{ 'background-color': '#f6f6f6' }">
           <div>
-            <h1>We are awesome</h1>
-            <span>Fucking, really, awesome</span>
+            <h1>{{ $t('weAreAwesome') }}</h1>
+            <span>{{ $t('reallyAwesome') }}</span>
           </div>
         </slide>
         <slide slot="slides" :style="{ 'background-color': '#ffc107' }">

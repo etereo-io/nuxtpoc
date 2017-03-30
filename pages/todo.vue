@@ -53,7 +53,6 @@ export default {
   },
   methods: {
     toggleCheckFromStore(item) {
-      console.log(item.completed);
       this.$store.commit('todos/checkTodo', item)
     },
     toggleCheckFromComponent(id) {

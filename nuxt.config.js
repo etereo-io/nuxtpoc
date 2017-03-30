@@ -111,19 +111,18 @@ module.exports = {
     prefetch: true
   },
   // The plugins property lets you add vue.js plugins easily to your main application.
-  plugins: ['~plugins/svg-sprite-loader'],
+  plugins: ['~plugins/svg-sprite-loader', '~plugins/i18n'],
   // Define the workspace (string)
   rootDir: process.cwd(),
   router: {
     base: '/',
     mode: 'history',
-    linkActiveClass: '',
     // The scrollBehavior option lets you define a custom behavior for the scroll position between the routes. This method is called every time a page is rendered.
     scrollBehavior: function (to, from, savedPosition) {
       return { x: 0, y: 0 }
     },
     // Set the default(s) middleware for every pages of the application.
-    middleware: []
+    middleware: ['i18n']
     // You may want to extend the routes created by nuxt.js. You can do it via the extendRoutes option.
     // extendRoutes(routes, resolve) {
     //   routes.push({

@@ -10,7 +10,12 @@
           <slot></slot>
         </ul>
       </nav>
-      <div class="social-icons"></div>
+      <div>
+        <ul>
+          <li @click="setLang('es')">{{ $t('spanish') }}</li>
+          <li @click="setLang('en')">{{ $t('english') }}</li>
+        </ul>
+      </div>
     </div>
     </footer>
 </template>
@@ -30,9 +35,11 @@ export default {
       return path ? this.$el.querySelector(`a[href='${path}']`) : this.$el.querySelector('.router-link-active');
     },
     setInkBarPosition(el = this.getActiveElement()) {
-      console.log(el.offsetLeft, el.clientWidth)
       this.offset = el.offsetLeft;
       this.itemWidth = el.clientWidth - 20;
+    },
+    setLang(lang) {
+      this.$store.dispatch('lang/setLang', lang);
     },
   },
   watch: {
@@ -54,14 +61,8 @@ export default {
     position absolute
     bottom 0
     width 100%
-  .social-icons
-    img
-      display inline-block
-      padding 2px
-      max-width 15px
-      max-height 15px
-      opacity .5
   li
+    transition background-color 250ms ease-in
     &.router-link-active
       a
         color #fff
@@ -75,6 +76,8 @@ export default {
       transition color 250ms ease-in
       &:hover
         color #fff
+    &:hover
+      background-color rgba(75, 75, 75, 0.5)
 
   .ink-bar
     border-top 1px solid #abaaab

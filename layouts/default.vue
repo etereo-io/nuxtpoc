@@ -1,8 +1,8 @@
 <template>
   <div>
     <navigation>
-      <nuxt-link tag="li" class="button" to="/" exact><a>Home</a></nuxt-link>
-      <nuxt-link tag="li" class="button" to="/todo" exact><a>Todo</a></nuxt-link>
+      <nuxt-link tag="li" class="button" to="/" exact><a>{{ $t('home') }}</a></nuxt-link>
+      <nuxt-link tag="li" class="button" to="/todo" exact><a>{{ $t('todos') }}</a></nuxt-link>
     </navigation>
     <transition name="bounce" appear>
     <nuxt/>
